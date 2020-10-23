@@ -6,7 +6,7 @@
 
 
 	struct Vector {
-	private:
+	public:
 		double x, y;
 	public:
 		Vector();
@@ -31,8 +31,6 @@
 	class GAMEN_EXAM_API VectorSolver {
 	public:
 		int Selected;
-
-	private:
 		Vector vecA, vecB;
 
 	public:

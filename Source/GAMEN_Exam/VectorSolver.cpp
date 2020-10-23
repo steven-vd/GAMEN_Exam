@@ -6,6 +6,7 @@
 #include <assert.h>
 
 VectorSolver::VectorSolver() {
+	this->Selected = Selectable::None;
 	vecA = Vector(0, 0);
 	vecB = Vector(0, 0);
 }
@@ -17,7 +18,15 @@ void VectorSolver::EnterDigit(int digit) {
 	//DEBUG
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::FromInt(digit));
 
-	this->Selected = Selectable::None;
+	switch (this->Selected) {
+	case Selectable::VecAx:
+		vecA.x *= 10;
+		vecA.x += digit;
+		break;
+	case Selectable::None:
+	default:
+		break;
+	}
 }
 
 Vector::Vector() {

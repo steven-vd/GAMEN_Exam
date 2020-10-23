@@ -12,8 +12,6 @@
 		class GAMEN_EXAM_API AInteractiveBlackboard : public AActor {
 		GENERATED_BODY()
 
-		public:
-
 		private:
 			VectorSolver vectorSolver;
 
@@ -33,4 +31,6 @@
 				void EnterDigit(int digit);
 			UFUNCTION(BluePrintCallable)
 				void SetSelected(Selectable selected);
+
+		private:
 	};

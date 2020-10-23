@@ -2,6 +2,7 @@
 
 
 #include "InteractiveBlackboard.h"
+#include "Components/TextRenderComponent.h"
 
 // Sets default values
 AInteractiveBlackboard::AInteractiveBlackboard() {
@@ -24,6 +25,8 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 
 void AInteractiveBlackboard::EnterDigit(int digit) {
 	this->vectorSolver.EnterDigit(digit);
+	((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("VecAxInput"))))->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.x)));
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, FString::FromInt(digit));
 }
 
 void AInteractiveBlackboard::SetSelected(Selectable selected) {
