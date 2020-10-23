@@ -10,5 +10,7 @@ VectorSolver::~VectorSolver() {
 }
 
 void VectorSolver::EnterDigit(int digit) {
+	//DEBUG
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::FromInt(digit));
+
 }
