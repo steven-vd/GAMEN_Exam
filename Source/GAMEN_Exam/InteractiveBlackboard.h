@@ -5,29 +5,32 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include <GAMEN_Exam\VectorSolver.h>
+#include "VectorSolver.h"
 #include "InteractiveBlackboard.generated.h"
 
-UCLASS()
-class GAMEN_EXAM_API AInteractiveBlackboard : public AActor {
-	GENERATED_BODY()
+	UCLASS()
+		class GAMEN_EXAM_API AInteractiveBlackboard : public AActor {
+		GENERATED_BODY()
 
-private:
-	VectorSolver vectorSolver;
+		public:
 
-public:
-	// Sets default values for this actor's properties
-	AInteractiveBlackboard();
+		private:
+			VectorSolver vectorSolver;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+		public:
+			// Sets default values for this actor's properties
+			AInteractiveBlackboard();
 
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+		protected:
+			// Called when the game starts or when spawned
+			virtual void BeginPlay() override;
 
-	UFUNCTION(BlueprintCallable)
-	void EnterDigit(int digit);
+		public:
+			// Called every frame
+			virtual void Tick(float DeltaTime) override;
 
-
-};
+			UFUNCTION(BlueprintCallable)
+				void EnterDigit(int digit);
+			UFUNCTION(BluePrintCallable)
+				void SetSelected(Selectable selected);
+	};
