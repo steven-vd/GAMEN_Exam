@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include <GAMEN_Exam\TriangleSolver.h>
+#include <GAMEN_Exam\VectorSolver.h>
 #include "InteractiveBlackboard.generated.h"
 
 UCLASS()
@@ -12,7 +12,7 @@ class GAMEN_EXAM_API AInteractiveBlackboard : public AActor {
 	GENERATED_BODY()
 
 private:
-	TriangleSolver triangleSolver;
+	VectorSolver vectorSolver;
 
 public:
 	// Sets default values for this actor's properties

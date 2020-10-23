@@ -11,4 +11,6 @@ class GAMEN_EXAM_API TriangleSolver {
 public:
 	TriangleSolver();
 	~TriangleSolver();
+
+
 };

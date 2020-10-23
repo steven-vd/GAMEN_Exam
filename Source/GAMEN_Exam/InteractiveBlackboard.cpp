@@ -7,7 +7,7 @@
 AInteractiveBlackboard::AInteractiveBlackboard() {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	triangleSolver = TriangleSolver();
+	vectorSolver = VectorSolver();
 }
 
 // Called when the game starts or when spawned
@@ -23,6 +23,6 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 }
 
 void AInteractiveBlackboard::EnterDigit(int digit) {
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::FromInt(digit));
+	vectorSolver.EnterDigit(digit);
 }
 
