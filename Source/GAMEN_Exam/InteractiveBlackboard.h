@@ -20,6 +20,9 @@
 			UTextRenderComponent* vecAyTRC;
 			UTextRenderComponent* vecBxTRC;
 			UTextRenderComponent* vecByTRC;
+			UTextRenderComponent* magATRC;
+			UTextRenderComponent* normAxTRC;
+			UTextRenderComponent* normAyTRC;
 
 		public:
 			// Sets default values for this actor's properties
