@@ -6,7 +6,7 @@
 // Sets default values
 AInteractiveBlackboard::AInteractiveBlackboard() {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 	this->vectorSolver = VectorSolver();
 }
 
@@ -27,6 +27,11 @@ void AInteractiveBlackboard::BeginPlay() {
 	normByTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("NormBy"))));
 
 	determinantTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("Determinant"))));
+}
+
+void AInteractiveBlackboard::Tick(float DeltaTime) {
+	Super::Tick(DeltaTime);
+	//GetWorld()->LineBatcher->DrawLine(FVector(0,0,0), FVector(100,100,100), FColor::Red, SDPG_World, 30.f, 1);
 }
 
 void AInteractiveBlackboard::UpdateUI() {
