@@ -33,8 +33,16 @@ void AInteractiveBlackboard::EnterDigit(int digit) {
 	vecByTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecB.y)));
 }
 
+void AInteractiveBlackboard::DotLeft() {
+	vectorSolver.DotLeft();
+}
+
+void AInteractiveBlackboard::DotRight() {
+	vectorSolver.DotRight();
+}
+
 void AInteractiveBlackboard::ClearVector() {
-	
+	vectorSolver.ClearVector();
 }
 
 void AInteractiveBlackboard::SetSelected(Selectable selected) {

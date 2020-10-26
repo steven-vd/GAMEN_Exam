@@ -38,7 +38,64 @@ void VectorSolver::EnterDigit(int digit) {
 	}
 }
 
+void VectorSolver::DotLeft() {
+	switch (this->Selected) {
+	case Selectable::VecAx:
+		vecA.x /= 10;
+		break;
+	case Selectable::VecAy:
+		vecA.y /= 10;
+		break;
+	case Selectable::VecBx:
+		vecB.x /= 10;
+		break;
+	case Selectable::VecBy:
+		vecB.y /= 10;
+		break;
+	case Selectable::None:
+	default:
+		break;
+	}
+}
+
+void VectorSolver::DotRight() {
+	switch (this->Selected) {
+	case Selectable::VecAx:
+		vecA.x *= 10;
+		break;
+	case Selectable::VecAy:
+		vecA.y *= 10;
+		break;
+	case Selectable::VecBx:
+		vecB.x *= 10;
+		break;
+	case Selectable::VecBy:
+		vecB.y *= 10;
+		break;
+	case Selectable::None:
+	default:
+		break;
+	}
+}
+
 void VectorSolver::ClearVector() {
+	switch (this->Selected) {
+	case Selectable::VecAx:
+		vecA.x = 0;
+		break;
+	case Selectable::VecAy:
+		vecA.y = 0;
+		break;
+	case Selectable::VecBx:
+		vecB.x = 0;
+		break;
+	case Selectable::VecBy:
+		vecB.y = 0;
+		break;
+	case Selectable::None:
+	default:
+		break;
+	}
 }
 
 Vector::Vector() {

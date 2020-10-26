@@ -36,6 +36,10 @@
 			UFUNCTION(BlueprintCallable)
 				void EnterDigit(int digit);
 			UFUNCTION(BlueprintCallable)
+				void DotLeft();
+			UFUNCTION(BlueprintCallable)
+				void DotRight();
+			UFUNCTION(BlueprintCallable)
 				void ClearVector();
 			UFUNCTION(BluePrintCallable)
 				void SetSelected(Selectable selected);
