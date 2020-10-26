@@ -6,6 +6,7 @@
 #include "GameFramework/Actor.h"
 #include <GAMEN_Exam\VectorSolver.h>
 #include "VectorSolver.h"
+#include "Components/TextRenderComponent.h"
 #include "InteractiveBlackboard.generated.h"
 
 	UCLASS()
@@ -14,6 +15,11 @@
 
 		private:
 			VectorSolver vectorSolver;
+
+			UTextRenderComponent* vecAxTRC;
+			UTextRenderComponent* vecAyTRC;
+			UTextRenderComponent* vecBxTRC;
+			UTextRenderComponent* vecByTRC;
 
 		public:
 			// Sets default values for this actor's properties
@@ -29,6 +35,8 @@
 
 			UFUNCTION(BlueprintCallable)
 				void EnterDigit(int digit);
+			UFUNCTION(BlueprintCallable)
+				void ClearVector();
 			UFUNCTION(BluePrintCallable)
 				void SetSelected(Selectable selected);
 

@@ -15,18 +15,30 @@ VectorSolver::~VectorSolver() {
 }
 
 void VectorSolver::EnterDigit(int digit) {
-	//DEBUG
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, FString::FromInt(digit));
-
 	switch (this->Selected) {
 	case Selectable::VecAx:
 		vecA.x *= 10;
 		vecA.x += digit;
 		break;
+	case Selectable::VecAy:
+		vecA.y *= 10;
+		vecA.y += digit;
+		break;
+	case Selectable::VecBx:
+		vecB.x *= 10;
+		vecB.x += digit;
+		break;
+	case Selectable::VecBy:
+		vecB.y *= 10;
+		vecB.y += digit;
+		break;
 	case Selectable::None:
 	default:
 		break;
 	}
+}
+
+void VectorSolver::ClearVector() {
 }
 
 Vector::Vector() {

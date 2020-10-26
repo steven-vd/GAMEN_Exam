@@ -38,5 +38,6 @@
 		~VectorSolver();
 
 		void EnterDigit(int digit);
+		void ClearVector();
 
 	};
