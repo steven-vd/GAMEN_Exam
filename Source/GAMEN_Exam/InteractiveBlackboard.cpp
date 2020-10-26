@@ -25,24 +25,31 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 
 }
 
-void AInteractiveBlackboard::EnterDigit(int digit) {
-	this->vectorSolver.EnterDigit(digit);
+void AInteractiveBlackboard::UpdateUI() {
 	vecAxTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.x)));
 	vecAyTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.y)));
 	vecBxTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecB.x)));
 	vecByTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecB.y)));
 }
 
-void AInteractiveBlackboard::DotLeft() {
-	vectorSolver.DotLeft();
+void AInteractiveBlackboard::EnterDigit(int digit) {
+	this->vectorSolver.EnterDigit(digit);
+	this->UpdateUI();
 }
 
-void AInteractiveBlackboard::DotRight() {
+void AInteractiveBlackboard::DotLeftVector() {
+	vectorSolver.DotLeft();
+	this->UpdateUI();
+}
+
+void AInteractiveBlackboard::DotRightVector() {
 	vectorSolver.DotRight();
+	this->UpdateUI();
 }
 
 void AInteractiveBlackboard::ClearVector() {
 	vectorSolver.ClearVector();
+	this->UpdateUI();
 }
 
 void AInteractiveBlackboard::SetSelected(Selectable selected) {
