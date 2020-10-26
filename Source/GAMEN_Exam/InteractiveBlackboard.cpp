@@ -21,11 +21,12 @@ void AInteractiveBlackboard::BeginPlay() {
 	magATRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("VecAMagnitude"))));
 	normAxTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("NormAx"))));
 	normAyTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("NormAy"))));
-}
 
-void AInteractiveBlackboard::Tick(float DeltaTime) {
-	Super::Tick(DeltaTime);
+	magBTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("VecBMagnitude"))));
+	normBxTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("NormBx"))));
+	normByTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("NormBy"))));
 
+	determinantTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("Determinant"))));
 }
 
 void AInteractiveBlackboard::UpdateUI() {
@@ -35,6 +36,14 @@ void AInteractiveBlackboard::UpdateUI() {
 	vecByTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecB.y)));
 
 	magATRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.GetMagnitude())));
+	normAxTRC->SetText(FText::FromString(FString::Printf(TEXT("x: %lf"), vectorSolver.vecA.GetNormalized().x)));
+	normAyTRC->SetText(FText::FromString(FString::Printf(TEXT("y: %lf"), vectorSolver.vecA.GetNormalized().y)));
+
+	magBTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecB.GetMagnitude())));
+	normBxTRC->SetText(FText::FromString(FString::Printf(TEXT("x: %lf"), vectorSolver.vecB.GetNormalized().x)));
+	normByTRC->SetText(FText::FromString(FString::Printf(TEXT("y: %lf"), vectorSolver.vecB.GetNormalized().y)));
+
+	determinantTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.GetDeterminent(&vectorSolver.vecB))));
 }
 
 void AInteractiveBlackboard::EnterDigit(int digit) {

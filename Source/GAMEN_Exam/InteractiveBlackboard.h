@@ -20,9 +20,16 @@
 			UTextRenderComponent* vecAyTRC;
 			UTextRenderComponent* vecBxTRC;
 			UTextRenderComponent* vecByTRC;
+
 			UTextRenderComponent* magATRC;
 			UTextRenderComponent* normAxTRC;
 			UTextRenderComponent* normAyTRC;
+
+			UTextRenderComponent* magBTRC;
+			UTextRenderComponent* normBxTRC;
+			UTextRenderComponent* normByTRC;
+
+			UTextRenderComponent* determinantTRC;
 
 		public:
 			// Sets default values for this actor's properties
@@ -33,9 +40,6 @@
 			virtual void BeginPlay() override;
 
 		public:
-			// Called every frame
-			virtual void Tick(float DeltaTime) override;
-
 			UFUNCTION(BlueprintCallable)
 				void EnterDigit(int digit);
 			UFUNCTION(BlueprintCallable)
