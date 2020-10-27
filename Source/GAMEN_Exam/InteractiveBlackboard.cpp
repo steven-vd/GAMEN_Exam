@@ -8,6 +8,7 @@ AInteractiveBlackboard::AInteractiveBlackboard() {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	this->vectorSolver = VectorSolver();
+	lineBatchComponent = CreateDefaultSubobject<ULineBatchComponent>(TEXT("LineBatcher"));
 }
 
 // Called when the game starts or when spawned
@@ -31,7 +32,21 @@ void AInteractiveBlackboard::BeginPlay() {
 
 void AInteractiveBlackboard::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
-	//GetWorld()->LineBatcher->DrawLine(FVector(0,0,0), FVector(100,100,100), FColor::Red, SDPG_World, 30.f, 1);
+	const float vectorWidth = 50.f;
+	//Get longest and shortest vector
+	Vector longest, shortest;
+	longest = vectorSolver.vecA.GetMagnitude() > vectorSolver.vecB.GetMagnitude() ? vectorSolver.vecA : vectorSolver.vecB;
+	shortest = vectorSolver.vecA.GetMagnitude() > vectorSolver.vecB.GetMagnitude() ? vectorSolver.vecB : vectorSolver.vecA;
+
+	double longestMagnitude = longest.GetMagnitude();
+	longest = longest.GetNormalized();
+	shortest = shortest.GetNormalized();
+	//draw longest vector
+	FVector start = this->GetActorTransform().GetLocation();
+	FVector end = FVector(start.X, start.Y + longest.x * vectorsMaxLength, start.Z + longest.y * vectorsMaxLength);
+	//end = FVector(start.X, start.Y + 1000, start.Z + 1000);
+	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::SanitizeFloat(longest.x * vectorsMaxLength));
+	lineBatchComponent->DrawLine(start, end, FLinearColor(1, 1, 1, 1), 4, vectorWidth, 1.f);
 }
 
 void AInteractiveBlackboard::UpdateUI() {

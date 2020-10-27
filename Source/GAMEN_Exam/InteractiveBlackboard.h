@@ -7,6 +7,7 @@
 #include <GAMEN_Exam\VectorSolver.h>
 #include "VectorSolver.h"
 #include "Components/TextRenderComponent.h"
+#include "Components/LineBatchComponent.h"
 #include "InteractiveBlackboard.generated.h"
 
 	UCLASS()
@@ -31,9 +32,9 @@
 
 			UTextRenderComponent* determinantTRC;
 
+			ULineBatchComponent* lineBatchComponent;
+
 		public:
-			UPROPERTY(EditAnywhere)
-				FVector vectorsStartPos;
 			UPROPERTY(EditAnywhere)
 				float vectorsMaxLength;
 
