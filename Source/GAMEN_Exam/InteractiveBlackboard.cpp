@@ -52,15 +52,18 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 	longest = longest.GetNormalized();
 	shortest = shortest.GetNormalized();
 
+	//Vector looks
+	float const thickness = 5;
+	float const arrowSize = 250;
+
 	//draw longest vector
 	FVector start = this->GetActorTransform().GetLocation();
 	FVector end = FVector(start.X, start.Y + longest.x * vectorsMaxLength, start.Z + longest.y * vectorsMaxLength);
-	DrawDebugDirectionalArrow(GetWorld(), start, end, 25, FColor::White, false, -1.f, 10, 5);
+	DrawDebugDirectionalArrow(GetWorld(), start, end, arrowSize, FColor::White, false, -1.f, 10, thickness);
 	//draw shortest vector
 	start = this->GetActorTransform().GetLocation();
 	end = FVector(start.X, start.Y + shortest.x * vectorsMaxLength * lenRatio, start.Z + shortest.y * vectorsMaxLength * lenRatio);
-	DrawDebugDirectionalArrow(GetWorld(), start, end, 25, FColor::White, false, -1.f, 10, 5);
-
+	DrawDebugDirectionalArrow(GetWorld(), start, end, arrowSize, FColor::White, false, -1.f, 10, thickness);
 }
 
 void AInteractiveBlackboard::UpdateUI() {
