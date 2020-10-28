@@ -2,6 +2,7 @@
 
 
 #include "InteractiveBlackboard.h"
+#include "DrawDebugHelpers.h"
 
 // Sets default values
 AInteractiveBlackboard::AInteractiveBlackboard() {
@@ -35,18 +36,31 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 	const float vectorWidth = 50.f;
 	//Get longest and shortest vector
 	Vector longest, shortest;
-	longest = vectorSolver.vecA.GetMagnitude() > vectorSolver.vecB.GetMagnitude() ? vectorSolver.vecA : vectorSolver.vecB;
-	shortest = vectorSolver.vecA.GetMagnitude() > vectorSolver.vecB.GetMagnitude() ? vectorSolver.vecB : vectorSolver.vecA;
+	double vecAMag = vectorSolver.vecA.GetMagnitude();
+	double vecBMag = vectorSolver.vecB.GetMagnitude();
+	if (vecAMag > vecBMag) {
+		//vecA is longest
+		longest = vectorSolver.vecA;
+		shortest = vectorSolver.vecB;
+	} else {
+		//vecB is longest or they are equal
+		longest = vectorSolver.vecB;
+		shortest = vectorSolver.vecA;
+	}
 
-	double longestMagnitude = longest.GetMagnitude();
+	double lenRatio = shortest.GetMagnitude() / longest.GetMagnitude();
 	longest = longest.GetNormalized();
 	shortest = shortest.GetNormalized();
+
 	//draw longest vector
 	FVector start = this->GetActorTransform().GetLocation();
 	FVector end = FVector(start.X, start.Y + longest.x * vectorsMaxLength, start.Z + longest.y * vectorsMaxLength);
-	//end = FVector(start.X, start.Y + 1000, start.Z + 1000);
-	//GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::SanitizeFloat(longest.x * vectorsMaxLength));
-	lineBatchComponent->DrawLine(start, end, FLinearColor(1, 1, 1, 1), 4, vectorWidth, 1.f);
+	DrawDebugDirectionalArrow(GetWorld(), start, end, 25, FColor::White, false, -1.f, 10, 5);
+	//draw shortest vector
+	start = this->GetActorTransform().GetLocation();
+	end = FVector(start.X, start.Y + shortest.x * vectorsMaxLength * lenRatio, start.Z + shortest.y * vectorsMaxLength * lenRatio);
+	DrawDebugDirectionalArrow(GetWorld(), start, end, 25, FColor::White, false, -1.f, 10, 5);
+
 }
 
 void AInteractiveBlackboard::UpdateUI() {
