@@ -57,6 +57,8 @@
 			UFUNCTION(BlueprintCallable)
 				void DotRightVector();
 			UFUNCTION(BlueprintCallable)
+				void InvertVector();
+			UFUNCTION(BlueprintCallable)
 				void ClearVector();
 			UFUNCTION(BluePrintCallable)
 				void SetSelected(Selectable selected);

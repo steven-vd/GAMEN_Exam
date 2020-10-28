@@ -78,6 +78,26 @@ void VectorSolver::DotRight() {
 	}
 }
 
+void VectorSolver::InvertVector() {
+	switch (this->Selected) {
+	case Selectable::VecAx:
+		vecA.x *= -1;
+		break;
+	case Selectable::VecAy:
+		vecA.y *= -1;
+		break;
+	case Selectable::VecBx:
+		vecB.x *= -1;
+		break;
+	case Selectable::VecBy:
+		vecB.y *= -1;
+		break;
+	case Selectable::None:
+	default:
+		break;
+	}
+}
+
 void VectorSolver::ClearVector() {
 	switch (this->Selected) {
 	case Selectable::VecAx:
