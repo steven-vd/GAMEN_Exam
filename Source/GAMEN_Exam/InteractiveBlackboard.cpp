@@ -9,7 +9,6 @@ AInteractiveBlackboard::AInteractiveBlackboard() {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	this->vectorSolver = VectorSolver();
-	lineBatchComponent = CreateDefaultSubobject<ULineBatchComponent>(TEXT("LineBatcher"));
 }
 
 // Called when the game starts or when spawned
@@ -67,18 +66,18 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 }
 
 void AInteractiveBlackboard::UpdateUI() {
-	vecAxTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.x)));
-	vecAyTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.y)));
-	vecBxTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecB.x)));
-	vecByTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecB.y)));
+	vecAxTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecA.x)));
+	vecAyTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecA.y)));
+	vecBxTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecB.x)));
+	vecByTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecB.y)));
 
-	magATRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.GetMagnitude())));
+	magATRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecA.GetMagnitude())));
 	normAxTRC->SetText(FText::FromString(FString::Printf(TEXT("x: %lf"), vectorSolver.vecA.GetNormalized().x)));
-	normAyTRC->SetText(FText::FromString(FString::Printf(TEXT("y: %lf"), vectorSolver.vecA.GetNormalized().y)));
+	normAyTRC->SetText(FText::FromString(FString::Printf(TEXT("y: %lf cm"), vectorSolver.vecA.GetNormalized().y)));
 
-	magBTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecB.GetMagnitude())));
-	normBxTRC->SetText(FText::FromString(FString::Printf(TEXT("x: %lf"), vectorSolver.vecB.GetNormalized().x)));
-	normByTRC->SetText(FText::FromString(FString::Printf(TEXT("y: %lf"), vectorSolver.vecB.GetNormalized().y)));
+	magBTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecB.GetMagnitude())));
+	normBxTRC->SetText(FText::FromString(FString::Printf(TEXT("x: %lf cm"), vectorSolver.vecB.GetNormalized().x)));
+	normByTRC->SetText(FText::FromString(FString::Printf(TEXT("y: %lf cm"), vectorSolver.vecB.GetNormalized().y)));
 
 	determinantTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), vectorSolver.vecA.GetDeterminent(&vectorSolver.vecB))));
 }
