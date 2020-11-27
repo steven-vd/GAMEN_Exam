@@ -1,3 +1,5 @@
+#include "SmoothRotationComponent.h"
+
 #include "CppFpsCharacter.h"
 
 ACppFpsCharacter::ACppFpsCharacter() {
@@ -29,10 +31,10 @@ void ACppFpsCharacter::Interact() {
 
 	FHitResult hit;
 	FVector start = firstPersonCamera->GetComponentLocation();
-	FVector end = start + firstPersonCamera->GetForwardVector() * 500.f; //Change 5000 to set length
+	FVector end = start + firstPersonCamera->GetForwardVector() * 500.f; //Change 500 to set length
 	FCollisionQueryParams queryParams;
 
 	if (GetWorld()->LineTraceSingleByChannel(hit, start, end, ECC_GameTraceChannel2, queryParams)) {
-		UE_LOG(LogTemp, Warning, TEXT("Hit     : %d (%s)"), hit.GetActor()->GetUniqueID(), *hit.GetActor()->GetName());
+		hit.GetActor()->FindComponentByClass<USmoothRotationComponent>()->Toggle();
 	}
 }
