@@ -17,6 +17,8 @@
 		double GetDeterminent2D(Vector* other);
 		double GetDeterminent(Vector* other1, Vector* other2);
 		Vector GetScaled(double scalar);
+		double GetDotProduct2D(Vector* other);
+		double GetDotProduct(Vector* other);
 	};
 
 
@@ -55,5 +57,10 @@
 		void DotRight();
 		void InvertVector();
 		void ClearVector();
+
+		bool BasisOrthogonal(Vector* vec1, Vector* vec2);
+		bool BasisNormal(Vector* vec1, Vector* vec2);
+		bool BasisOrthogonal(Vector* vec1, Vector* vec2, Vector* vec3);
+		bool BasisNormal(Vector* vec1, Vector* vec2, Vector* vec3);
 
 	};

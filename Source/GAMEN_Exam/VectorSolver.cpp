@@ -24,7 +24,7 @@ void VectorSolver::EnterDigit(int digit) {
 		break;
 	case Selectable::VecAz:
 		vecA.z *= 10;
-		vecA.z += digit;
+		vecA.z = digit;
 		break;
 	case Selectable::VecBx:
 		vecB.x *= 10;
@@ -54,6 +54,7 @@ void VectorSolver::EnterDigit(int digit) {
 	default:
 		break;
 	}
+
 }
 
 void VectorSolver::DotLeft() {
@@ -196,6 +197,23 @@ void VectorSolver::ClearVector() {
 	}
 }
 
+bool BasisOrthogonal(Vector* vec1, Vector* vec2) {
+	//TODO
+	return false;
+}
+bool BasisNormal(Vector* vec1, Vector* vec2) {
+
+	return false;
+}
+bool BasisOrthogonal(Vector* vec1, Vector* vec2, Vector* vec3) {
+
+	return false;
+}
+bool BasisNormal(Vector* vec1, Vector* vec2, Vector* vec3) {
+
+	return false;
+}
+
 Vector::Vector() {
 	assert(false);
 }
@@ -204,6 +222,19 @@ Vector::Vector(double x, double y, double z) {
 	this->x = x;
 	this->y = y;
 	this->z = z;
+}
+
+double Vector::GetDotProduct2D(Vector* other) {
+	return
+		x * other->x +
+		y * other->y;
+}
+
+double Vector::GetDotProduct(Vector* other) {
+	return
+		x * other->x +
+		y * other->y +
+		z * other->z;
 }
 
 double Vector::GetMagnitude() {
@@ -216,18 +247,18 @@ Vector Vector::GetNormalized() {
 
 double Vector::GetDeterminent(Vector* other1, Vector* other2) {
 	double det =
-		x * (other1->y * other2->z - other2->y * other1->y) -
+		x * (other1->y * other2->z - other2->y * other1->z) -
 		other1->x * (y * other2->z - other2->y * z) +
 		other2->x * (y * other1->z - other1->y * z);
-	UE_LOG(LogTemp, Warning, TEXT("X: %ld, %ld, %ld"), x, y, z);
-	UE_LOG(LogTemp, Warning, TEXT("Y: %ld, %ld, %ld"), other1->x, other1->y, other1->z);
-	UE_LOG(LogTemp, Warning, TEXT("Z: %ld, %ld, %ld"), other2->x, other2->y, other2->z);
-	UE_LOG(LogTemp, Warning, TEXT("Det: %ld"), det);
+	UE_LOG(LogTemp, Warning, TEXT("0: %lf, %lf, %lf"), x, y, z);
+	UE_LOG(LogTemp, Warning, TEXT("1: %lf, %lf, %lf"), other1->x, other1->y, other1->z);
+	UE_LOG(LogTemp, Warning, TEXT("2: %lf, %lf, %lf"), other2->x, other2->y, other2->z);
+	UE_LOG(LogTemp, Warning, TEXT("Det: %lf"), det);
 	return det;
 }
 
 double Vector::GetDeterminent2D(Vector* other) {
-	return x * other->y - y * other->x;//2D
+	return x * other->y - y * other->x;
 }
 
 Vector Vector::GetScaled(double scalar) {

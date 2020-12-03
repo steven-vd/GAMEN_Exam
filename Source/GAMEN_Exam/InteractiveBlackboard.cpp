@@ -43,12 +43,11 @@ void AInteractiveBlackboard::BeginPlay() {
 void AInteractiveBlackboard::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
 	const float vectorWidth = 50.f;
-	//Get longest and shortest vector
+	//Get longest, middle and shortest vector
 	Vector longest, middle, shortest;
 	double vecAMag = vectorSolver.vecA.GetMagnitude();
 	double vecBMag = vectorSolver.vecB.GetMagnitude();
 	double vecCMag = vectorSolver.vecC.GetMagnitude();
-	//TODO maybe let vec c factor in here. or not. whatever
 	if (vecAMag > vecBMag && vecAMag > vecCMag) {
 		//vecA is longest
 		longest = vectorSolver.vecA;
@@ -59,7 +58,7 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 			middle = vectorSolver.vecC;
 			shortest = vectorSolver.vecB;
 		}
-	} else if (vecBMag > vecAMag && vecBMag > vecCMag){
+	} else if (vecBMag > vecAMag && vecBMag > vecCMag) {
 		//vecB is longest or they are equal
 		longest = vectorSolver.vecB;
 		if (vecAMag > vecCMag) {
