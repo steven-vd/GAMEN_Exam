@@ -19,18 +19,33 @@
 
 			UTextRenderComponent* vecAxTRC;
 			UTextRenderComponent* vecAyTRC;
+			UTextRenderComponent* vecAzTRC;
 			UTextRenderComponent* vecBxTRC;
 			UTextRenderComponent* vecByTRC;
+			UTextRenderComponent* vecBzTRC;
+			UTextRenderComponent* vecCxTRC;
+			UTextRenderComponent* vecCyTRC;
+			UTextRenderComponent* vecCzTRC;
 
 			UTextRenderComponent* magATRC;
 			UTextRenderComponent* normAxTRC;
 			UTextRenderComponent* normAyTRC;
+			UTextRenderComponent* normAzTRC;
 
 			UTextRenderComponent* magBTRC;
 			UTextRenderComponent* normBxTRC;
 			UTextRenderComponent* normByTRC;
+			UTextRenderComponent* normBzTRC;
+
+			UTextRenderComponent* magCTRC;
+			UTextRenderComponent* normCxTRC;
+			UTextRenderComponent* normCyTRC;
+			UTextRenderComponent* normCzTRC;
 
 			UTextRenderComponent* determinantTRC;
+
+			UTextRenderComponent* xyBasisTRC;
+			UTextRenderComponent* xyzBasisTRC;
 
 			ULineBatchComponent* lineBatchComponent;
 

@@ -7,14 +7,15 @@
 
 	struct Vector {
 	public:
-		double x, y;
+		double x, y, z;
 	public:
 		Vector();
-		Vector(double x, double y);
+		Vector(double x, double y, double z);
 
 		double GetMagnitude();
 		Vector GetNormalized();
-		double GetDeterminent(Vector* other);
+		double GetDeterminent2D(Vector* other);
+		double GetDeterminent(Vector* other1, Vector* other2);
 		Vector GetScaled(double scalar);
 	};
 
@@ -24,14 +25,26 @@
 		None UMETA(DisplayName = "None"),
 		VecAx UMETA(DisplayName = "VecAx"),
 		VecAy UMETA(DisplayName = "VecAy"),
+		VecAz UMETA(DisplayName = "VecAz"),
 		VecBx UMETA(DisplayName = "VecBx"),
-		VecBy UMETA(DisplayName = "VecBy")
+		VecBy UMETA(DisplayName = "VecBy"),
+		VecBz UMETA(DisplayName = "VecBz"),
+		VecCx UMETA(DisplayName = "VecCx"),
+		VecCy UMETA(DisplayName = "VecCy"),
+		VecCz UMETA(DisplayName = "VecCz"),
+	};
+
+	UENUM(BlueprintType)
+		enum BasisType {
+		BasisNone UMETA(DisplayName = "BasisNone"),
+		Orthogonal UMETA(DisplayName = "Orthogonal"),
+		Orthonormal UMETA(DisplayName = "Orthonormal"),
 	};
 
 	class GAMEN_EXAM_API VectorSolver {
 	public:
 		int Selected;
-		Vector vecA, vecB;
+		Vector vecA, vecB, vecC;
 
 	public:
 		VectorSolver();
