@@ -1,6 +1,6 @@
+#include "SmoothRotationComponent.h"
 #include <assert.h>
 
-#include "SmoothRotationComponent.h"
 
 USmoothRotationComponent::USmoothRotationComponent() {
 	PrimaryComponentTick.bCanEverTick = true;

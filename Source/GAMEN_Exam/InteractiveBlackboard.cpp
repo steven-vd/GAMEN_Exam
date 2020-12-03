@@ -1,5 +1,9 @@
 #include "InteractiveBlackboard.h"
 #include "DrawDebugHelpers.h"
+#include "VectorSolver.h"
+
+#include "assert.h"
+
 // Sets default values
 AInteractiveBlackboard::AInteractiveBlackboard() {
 	PrimaryActorTick.bCanEverTick = true;
@@ -54,27 +58,32 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 		if (vecBMag > vecCMag) {
 			middle = vectorSolver.vecB;
 			shortest = vectorSolver.vecC;
-		} else {
+		}
+		else {
 			middle = vectorSolver.vecC;
 			shortest = vectorSolver.vecB;
 		}
-	} else if (vecBMag > vecAMag && vecBMag > vecCMag) {
+	}
+	else if (vecBMag >= vecAMag && vecBMag > vecCMag) {
 		//vecB is longest or they are equal
 		longest = vectorSolver.vecB;
 		if (vecAMag > vecCMag) {
 			middle = vectorSolver.vecA;
 			shortest = vectorSolver.vecC;
-		} else {
+		}
+		else {
 			middle = vectorSolver.vecC;
 			shortest = vectorSolver.vecA;
 		}
-	} else {
+	}
+	else {
 		//vecC is longest or they are equal
 		longest = vectorSolver.vecC;
 		if (vecAMag > vecBMag) {
 			middle = vectorSolver.vecA;
 			shortest = vectorSolver.vecB;
-		} else {
+		}
+		else {
 			middle = vectorSolver.vecB;
 			shortest = vectorSolver.vecA;
 		}
@@ -133,7 +142,37 @@ void AInteractiveBlackboard::UpdateUI() {
 	double det = vectorSolver.vecA.GetDeterminent(&vectorSolver.vecB, &vectorSolver.vecC);
 	determinantTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf"), det)));
 
-	//TODO show basis
+	UE_LOG(LogTemp, Warning, TEXT("NIGGER"));
+
+	if (vectorSolver.BasisOrthoNormal(&vectorSolver.vecA, &vectorSolver.vecB, &vectorSolver.vecC)) {
+		//3D Orthonormal
+		xyzBasisTRC->SetText(FText::FromString(TEXT("Orthonormal Basis")));
+	}
+	else if (vectorSolver.BasisOrthogonal(&vectorSolver.vecA, &vectorSolver.vecB, &vectorSolver.vecC)) {
+		//3D Orthogonal
+		xyzBasisTRC->SetText(FText::FromString(TEXT("Orthogonal Basis")));
+	}
+	else if (vectorSolver.Basis(&vectorSolver.vecA, &vectorSolver.vecB, &vectorSolver.vecC)) {
+		xyzBasisTRC->SetText(FText::FromString(TEXT("Random Basis")));
+	}
+	else {
+		xyzBasisTRC->SetText(FText::FromString(TEXT("Not a Basis")));
+	}
+
+	if (vectorSolver.BasisOrthoNormal(&vectorSolver.vecA, &vectorSolver.vecB)) {
+		//3D Orthonormal
+		xyBasisTRC->SetText(FText::FromString(TEXT("Orthonormal Basis")));
+	}
+	else if (vectorSolver.BasisOrthogonal(&vectorSolver.vecA, &vectorSolver.vecB)) {
+		//3D Orthogonal
+		xyBasisTRC->SetText(FText::FromString(TEXT("Orthogonal Basis")));
+	}
+	else if (vectorSolver.Basis(&vectorSolver.vecA, &vectorSolver.vecB)) {
+		xyBasisTRC->SetText(FText::FromString(TEXT("Random Basis")));
+	}
+	else {
+		xyBasisTRC->SetText(FText::FromString(TEXT("Not a Basis")));
+	}
 
 }
 

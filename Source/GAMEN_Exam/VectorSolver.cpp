@@ -197,21 +197,28 @@ void VectorSolver::ClearVector() {
 	}
 }
 
-bool BasisOrthogonal(Vector* vec1, Vector* vec2) {
-	//TODO
-	return false;
+bool VectorSolver::Basis(Vector* vec1, Vector* vec2) {
+	return vec1->GetDeterminent2D(vec2) != 0;
 }
-bool BasisNormal(Vector* vec1, Vector* vec2) {
 
-	return false;
+bool VectorSolver::BasisOrthogonal(Vector* vec1, Vector* vec2) {
+	return Basis(vec1, vec2) && vec1->GetDotProduct2D(vec2) == 0;
 }
-bool BasisOrthogonal(Vector* vec1, Vector* vec2, Vector* vec3) {
 
-	return false;
+bool VectorSolver::BasisOrthoNormal(Vector* vec1, Vector* vec2) {
+	return vec1->GetMagnitude() == vec2->GetMagnitude() && BasisOrthogonal(vec1, vec2);
 }
-bool BasisNormal(Vector* vec1, Vector* vec2, Vector* vec3) {
 
-	return false;
+bool VectorSolver::Basis(Vector* vec1, Vector* vec2, Vector* vec3) {
+	return vec1->GetDeterminent(vec2, vec3) != 0;
+}
+
+bool VectorSolver::BasisOrthogonal(Vector* vec1, Vector* vec2, Vector* vec3) {
+	return Basis(vec1, vec2, vec3) && vec1->GetDotProduct(vec2) == 0 && vec1->GetDotProduct(vec3) == 0 && vec2->GetDotProduct(vec3) == 0;
+}
+
+bool VectorSolver::BasisOrthoNormal(Vector* vec1, Vector* vec2, Vector* vec3) {
+	return vec1->GetMagnitude() == vec2->GetMagnitude() && vec2->GetMagnitude() == vec3->GetMagnitude() && BasisOrthogonal(vec1, vec2, vec3);
 }
 
 Vector::Vector() {
@@ -250,10 +257,6 @@ double Vector::GetDeterminent(Vector* other1, Vector* other2) {
 		x * (other1->y * other2->z - other2->y * other1->z) -
 		other1->x * (y * other2->z - other2->y * z) +
 		other2->x * (y * other1->z - other1->y * z);
-	UE_LOG(LogTemp, Warning, TEXT("0: %lf, %lf, %lf"), x, y, z);
-	UE_LOG(LogTemp, Warning, TEXT("1: %lf, %lf, %lf"), other1->x, other1->y, other1->z);
-	UE_LOG(LogTemp, Warning, TEXT("2: %lf, %lf, %lf"), other2->x, other2->y, other2->z);
-	UE_LOG(LogTemp, Warning, TEXT("Det: %lf"), det);
 	return det;
 }
 

@@ -1,6 +1,6 @@
-#include "SmoothRotationComponent.h"
-
 #include "CppFpsCharacter.h"
+
+#include "SmoothRotationComponent.h"
 
 ACppFpsCharacter::ACppFpsCharacter() {
 	PrimaryActorTick.bCanEverTick = true;

@@ -58,9 +58,11 @@
 		void InvertVector();
 		void ClearVector();
 
+		bool Basis(Vector* vec1, Vector* vec2);
 		bool BasisOrthogonal(Vector* vec1, Vector* vec2);
-		bool BasisNormal(Vector* vec1, Vector* vec2);
+		bool BasisOrthoNormal(Vector* vec1, Vector* vec2);
+		bool Basis(Vector* vec1, Vector* vec2, Vector* vec3);
 		bool BasisOrthogonal(Vector* vec1, Vector* vec2, Vector* vec3);
-		bool BasisNormal(Vector* vec1, Vector* vec2, Vector* vec3);
+		bool BasisOrthoNormal(Vector* vec1, Vector* vec2, Vector* vec3);
 
 	};
