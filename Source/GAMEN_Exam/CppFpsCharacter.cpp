@@ -21,9 +21,6 @@ void ACppFpsCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 }
 
 void ACppFpsCharacter::Interact() {
-	//DEBUG
-	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, TEXT("Interact"));
-
 	if (!firstPersonCamera) {
 		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Green, TEXT("Shit's fucked m8"));
 		return;
