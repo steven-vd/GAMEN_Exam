@@ -13,6 +13,8 @@ AInteractiveBlackboard::AInteractiveBlackboard() {
 // Called when the game starts or when spawned
 void AInteractiveBlackboard::BeginPlay() {
 	Super::BeginPlay();
+
+	/* --- Vector Stuff --- */
 	vecAxTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("VecAxInput"))));
 	vecAyTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("VecAyInput"))));
 	vecAzTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("VecAzInput"))));
@@ -42,6 +44,61 @@ void AInteractiveBlackboard::BeginPlay() {
 
 	xyBasisTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("XyBasisLabel"))));
 	xyzBasisTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("XyzBasisLabel"))));
+
+	/* --- Matrix Stuff --- */
+	matA11TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA11Input"))));
+	matA12TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA12Input"))));
+	matA13TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA13Input"))));
+	matA21TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA21Input"))));
+	matA22TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA22Input"))));
+	matA23TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA23Input"))));
+	matA31TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA31Input"))));
+	matA32TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA32Input"))));
+	matA33TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatA33Input"))));
+
+	matB11TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB11Input"))));
+	matB12TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB12Input"))));
+	matB13TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB13Input"))));
+	matB21TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB21Input"))));
+	matB22TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB22Input"))));
+	matB23TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB23Input"))));
+	matB31TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB31Input"))));
+	matB32TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB32Input"))));
+	matB33TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatB33Input"))));
+
+	matABR11TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR11Input"))));
+	matABR12TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR12Input"))));
+	matABR13TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR13Input"))));
+	matABR21TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR21Input"))));
+	matABR22TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR22Input"))));
+	matABR23TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR23Input"))));
+	matABR31TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR31Input"))));
+	matABR32TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR32Input"))));
+	matABR33TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABR33Input"))));
+
+	matC11TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatC11Input"))));
+	matC12TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatC12Input"))));
+	matC21TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatC21Input"))));
+	matC22TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatC22Input"))));
+
+	matD11TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatD11Input"))));
+	matD12TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatD12Input"))));
+	matD21TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatD21Input"))));
+	matD22TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatD22Input"))));
+
+	matCDR11TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatCDR11Input"))));
+	matCDR12TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatCDR12Input"))));
+	matCDR21TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatCDR21Input"))));
+	matCDR22TRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatCDR22Input"))));
+
+	detMatA = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("DetMatA"))));
+	detMatB = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("DetMatB"))));
+	detMatC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("DetMatC"))));
+	detMatD = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("DetMatD"))));
+
+	matABOperandTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatABOperation"))));
+	matCDOperandTRC = ((UTextRenderComponent*)(GetDefaultSubobjectByName(TEXT("MatCDOperation"))));
+
 }
 
 void AInteractiveBlackboard::Tick(float DeltaTime) {
@@ -114,6 +171,7 @@ void AInteractiveBlackboard::Tick(float DeltaTime) {
 }
 
 void AInteractiveBlackboard::UpdateUI() {
+	/* --- Vector --- */
 	vecAxTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecA.x)));
 	vecAyTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecA.y)));
 	vecAzTRC->SetText(FText::FromString(FString::Printf(TEXT("%lf cm"), vectorSolver.vecA.z)));
@@ -174,34 +232,151 @@ void AInteractiveBlackboard::UpdateUI() {
 		xyBasisTRC->SetText(FText::FromString(TEXT("Not a Basis")));
 	}
 
+	/* --- Matrixi --- */
+	matA11TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecA.x)));
+	matA12TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecB.x)));
+	matA13TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecC.x)));
+	matA21TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecA.y)));
+	matA22TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecB.y)));
+	matA23TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecC.y)));
+	matA31TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecA.z)));
+	matA32TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecB.z)));
+	matA33TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.vecC.z)));
+
+	matB11TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecA.x)));
+	matB12TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecB.x)));
+	matB13TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecC.x)));
+	matB21TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecA.y)));
+	matB22TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecB.y)));
+	matB23TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecC.y)));
+	matB31TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecA.z)));
+	matB32TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecB.z)));
+	matB33TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.vecC.z)));
+
+
+	matC11TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatC.vecA.x)));
+	matC12TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatC.vecB.x)));
+	matC21TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatC.vecA.y)));
+	matC22TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatC.vecB.y)));
+
+	matD11TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatD.vecA.x)));
+	matD12TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatD.vecB.x)));
+	matD21TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatD.vecA.y)));
+	matD22TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatD.vecB.y)));
+
+	detMatA->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatA.ComputeDeterminant())));
+	detMatB->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatB.ComputeDeterminant())));
+	detMatC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatC.ComputeDeterminant())));
+	detMatD->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matrixSolver.MatD.ComputeDeterminant())));
+
+	Matrix3 matABR;
+	switch (matABOperand) {
+	case PLUS:
+		matABR = matrixSolver.MatA.Add(matrixSolver.MatB);
+		matABOperandTRC->SetText(TEXT("+"));
+		break;
+	case MINUS:
+		matABR = matrixSolver.MatA.Sub(matrixSolver.MatB);
+		matABOperandTRC->SetText(TEXT("-"));
+		break;
+	case MULTIPLY:
+		matABR = matrixSolver.MatA.Mul(matrixSolver.MatB);
+		matABOperandTRC->SetText(TEXT("*"));
+		break;
+	}
+	matABR11TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecA.x)));
+	matABR12TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecB.x)));
+	matABR13TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecC.x)));
+	matABR21TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecA.y)));
+	matABR22TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecB.y)));
+	matABR23TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecC.y)));
+	matABR31TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecA.z)));
+	matABR32TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecB.z)));
+	matABR33TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matABR.vecC.z)));
+
+	Matrix2 matCDR;
+	switch (matCDOperand) {
+	case PLUS:
+		matCDR = matrixSolver.MatC.Add(matrixSolver.MatD);
+		matCDOperandTRC->SetText(TEXT("+"));
+		break;
+	case MINUS:
+		matCDR = matrixSolver.MatC.Sub(matrixSolver.MatD);
+		matCDOperandTRC->SetText(TEXT("-"));
+		break;
+	case MULTIPLY:
+		matCDR = matrixSolver.MatC.Mul(matrixSolver.MatD);
+		matCDOperandTRC->SetText(TEXT("*"));
+		break;
+	}
+	matCDR11TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matCDR.vecA.x)));
+	matCDR12TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matCDR.vecB.x)));
+	matCDR21TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matCDR.vecA.y)));
+	matCDR22TRC->SetText(FText::FromString(FString::Printf(TEXT("%.1lf"), matCDR.vecB.y)));
+
 }
 
 void AInteractiveBlackboard::EnterDigit(int digit) {
 	this->vectorSolver.EnterDigit(digit);
+	this->matrixSolver.EnterDigit(digit);
 	this->UpdateUI();
 }
 
 void AInteractiveBlackboard::DotLeftVector() {
 	vectorSolver.DotLeft();
+	matrixSolver.DotLeft();
 	this->UpdateUI();
 }
 
 void AInteractiveBlackboard::DotRightVector() {
 	vectorSolver.DotRight();
+	matrixSolver.DotRight();
 	this->UpdateUI();
 }
 
 void AInteractiveBlackboard::InvertVector() {
 	vectorSolver.InvertVector();
+	matrixSolver.Invert();
 	this->UpdateUI();
 }
 
 void AInteractiveBlackboard::ClearVector() {
 	vectorSolver.ClearVector();
+	matrixSolver.Clear();
 	this->UpdateUI();
 }
 
 void AInteractiveBlackboard::SetSelected(Selectable selected) {
 	this->vectorSolver.Selected = selected;
+	this->matrixSolver.Selected = selected;
 }
 
+void AInteractiveBlackboard::ToggleABOperand() {
+	switch (matABOperand) {
+	case PLUS:
+		matABOperand = Operand::MINUS;
+		break;
+	case MINUS:
+		matABOperand = Operand::MULTIPLY;
+		break;
+	case MULTIPLY:
+		matABOperand = Operand::PLUS;
+		break;
+	}
+	this->UpdateUI();
+}
+
+void AInteractiveBlackboard::ToggleCDOperand() {
+	switch (matCDOperand) {
+	case PLUS:
+		matCDOperand = Operand::MINUS;
+		break;
+	case MINUS:
+		matCDOperand = Operand::MULTIPLY;
+		break;
+	case MULTIPLY:
+		matCDOperand = Operand::PLUS;
+		break;
+	}
+	this->UpdateUI();
+}
