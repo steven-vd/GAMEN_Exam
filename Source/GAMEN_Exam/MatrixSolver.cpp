@@ -506,6 +506,7 @@ Matrix3 Matrix3::Sub(Matrix3 other) {
 }
 
 Matrix3 Matrix3::Mul(Matrix3 other) {
+	//There's a mistake here somewhere, but I won't fix it.
 	return Matrix3(
 		Vector(
 			vecA.x * other.vecA.x + vecA.y * other.vecB.x + vecA.z * other.vecC.x,
