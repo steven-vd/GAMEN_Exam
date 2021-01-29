@@ -4,7 +4,7 @@
 
 USmoothRotationComponent::USmoothRotationComponent() {
 	PrimaryComponentTick.bCanEverTick = true;
-	rotationSpeed = -5.f;
+	rotationSpeed = -100.f;
 	rotationMin = 0.f;
 	rotationMax = 90.f;
 }
@@ -20,11 +20,11 @@ void USmoothRotationComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	FTransform t = GetOwner()->GetActorTransform();
 	if (rotationSpeed > 0) {
 		if (t.GetRotation().Euler().Z < rotationMax) {
-			GetOwner()->AddActorLocalRotation(FRotator(0, rotationSpeed, 0));
+			GetOwner()->AddActorLocalRotation(FRotator(0, rotationSpeed * DeltaTime, 0));
 		}
 	} else {
 		if (t.GetRotation().Euler().Z > rotationMin) {
-			GetOwner()->AddActorLocalRotation(FRotator(0, rotationSpeed, 0));
+			GetOwner()->AddActorLocalRotation(FRotator(0, rotationSpeed * DeltaTime, 0));
 		}
 	}
 }
